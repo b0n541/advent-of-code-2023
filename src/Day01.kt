@@ -1,6 +1,5 @@
 fun main() {
     fun part1(input: List<String>): Int {
-
         return input
             .map { line -> line.replace(Regex("[a-z]*"), "") }
             .sumOf { numbers -> numbers.first().digitToIntOrNull()!! * 10 + numbers.last().digitToIntOrNull()!! }
@@ -33,7 +32,6 @@ fun main() {
 
 
     fun part2(input: List<String>): Int {
-
         return part1(input.map { line -> replaceWordWithDigit(line) })
     }
 
