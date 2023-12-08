@@ -1,8 +1,12 @@
 fun main() {
+    fun calibrationValue(line: String): Int {
+        val firstDigit = line.first { it.isDigit() }.digitToInt()
+        val lastDigit = line.last { it.isDigit() }.digitToInt()
+        return firstDigit * 10 + lastDigit
+    }
+
     fun part1(input: List<String>): Int {
-        return input
-            .map { line -> line.replace(Regex("[a-z]*"), "") }
-            .sumOf { numbers -> numbers.first().digitToIntOrNull()!! * 10 + numbers.last().digitToIntOrNull()!! }
+        return input.sumOf { calibrationValue(it) }
     }
 
     val numberAsStrings = mapOf(
