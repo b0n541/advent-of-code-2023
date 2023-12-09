@@ -2,9 +2,10 @@ import kotlin.math.pow
 
 fun main() {
 
-    data class ScratchCard(val winningNumbers: Set<Int>, val myNumbers: Set<Int>)
+    data class ScratchCard(val winningNumbers: Set<Int>, val myNumbers: Set<Int>) {
 
-    fun countWinningNumbers(card: ScratchCard) = card.myNumbers.count { card.winningNumbers.contains(it) }
+        fun countWinningNumbers() = myNumbers.count { winningNumbers.contains(it) }
+    }
 
     fun parseNumbers(numbers: String): Set<Int> {
         return numbers.trim()
@@ -25,7 +26,7 @@ fun main() {
 
     fun part1(input: List<String>): Int {
         return parseCards(input).sumOf { card ->
-            2.0.pow(countWinningNumbers(card) - 1).toInt()
+            2.0.pow(card.countWinningNumbers() - 1).toInt()
         }
     }
 
@@ -34,7 +35,7 @@ fun main() {
 
         var cardOccurrences = mutableMapOf<Int, Int>()
         parseCards(input).forEachIndexed { index, card ->
-            for (nextIndex in 0..countWinningNumbers(card)) {
+            for (nextIndex in 0..card.countWinningNumbers()) {
                 cardOccurrences.merge(
                     index + nextIndex,
                     if (nextIndex == 0) 1 else cardOccurrences[index]!!
