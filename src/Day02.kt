@@ -22,16 +22,12 @@ fun main() {
                 if (move.blue > maxBlue) maxBlue = move.blue
             }
 
-            val result = maxRed * maxGreen * maxBlue
-//            println("$maxRed $maxGreen $maxBlue: $result")
-
-            return result
+            return maxRed * maxGreen * maxBlue
         }
     }
 
     fun parseMove(move: String): Move {
         val colors = move.trim().split(",")
-//        println(colors)
 
         var red = 0
         var green = 0
@@ -51,18 +47,12 @@ fun main() {
     }
 
     fun parseMoves(moves: String): List<Move> {
-        val moveStrings = moves.split(";")
-//        println(moveStrings)
-        return moveStrings.map { move -> parseMove(move) }
+        return moves.split(";").map { move -> parseMove(move) }
     }
 
     fun parseGame(line: String): Game {
         val gameAndMoves = line.split(":")
-//        println(gameAndMoves)
-        val game = Game(gameAndMoves[0].removePrefix("Game ").toInt(), parseMoves(gameAndMoves[1]))
-//        println(game)
-
-        return game
+        return Game(gameAndMoves[0].removePrefix("Game ").toInt(), parseMoves(gameAndMoves[1]))
     }
 
     fun parseGames(input: List<String>): List<Game> {
@@ -70,10 +60,9 @@ fun main() {
     }
 
     fun part1(input: List<String>): Int {
-        val possibleGames = parseGames(input).filter { game -> game.isPossibleWith(12, 13, 14) }
-//        println(possibleGames)
-
-        return possibleGames.sumOf { game -> game.id }
+        return parseGames(input)
+            .filter { game -> game.isPossibleWith(12, 13, 14) }
+            .sumOf { game -> game.id }
     }
 
     fun part2(input: List<String>): Int {
